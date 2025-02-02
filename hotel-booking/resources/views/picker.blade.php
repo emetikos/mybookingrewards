@@ -188,7 +188,6 @@
                     const diffTime = Math.abs(date2 - date1);
                     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-                    console.log(diffDays + " days");
                     if (diffDays >=1 && diffDays <=7) {
                         this.dateOutOfRange = '';
                         let options = { day: '2-digit', month: 'short', year: 'numeric' };
