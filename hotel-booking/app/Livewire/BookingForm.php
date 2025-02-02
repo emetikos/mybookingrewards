@@ -60,9 +60,9 @@ class BookingForm extends Component
         $rules = [
             'hotelId' => 'required',
             'roomId' => 'required',
-            'nights' => 'required|max:7',
-            'rooms' => 'required|min:1|max:2',
-            'pax' => 'required|min:1|max:5',
+            'nights' => 'required|integer|min:1|max:7',
+            'rooms' => 'required|integer|min:1|max:2',
+            'pax' => 'required|integer|min:1|max:5',
         ];
 
         if ($this->pax > 1) {
