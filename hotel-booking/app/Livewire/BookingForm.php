@@ -27,14 +27,6 @@ class BookingForm extends Component
 
     public $datesToPrint = [];
 
-//    protected $rules = [
-//        'hotelId' => 'required',
-//        'roomId' => 'required',
-//        'nights' => 'required|max:7',
-//        'rooms' => 'required|min:1|max:2',
-//        'pax' => 'required|min:1|max:5',
-//    ];
-
     protected $listeners = ['updateDate'];
 
     public function boot()
