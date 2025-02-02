@@ -1,7 +1,7 @@
 
 ## Introduction
 
-This code exercise is a demo application for a single-page booking form
+This is a demo application for a single-page booking form
 
 ##
 
