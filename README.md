@@ -1,35 +1,66 @@
-# Clone the repository 
 
-# Add hotel-booking.local
+## Introduction
 
-Open Notepad as Administrator and navigate to:
+This code exercise is a demo application for a single-page booking form
+
+##
+
+### Set up a local page for docker
+- Open Notepad as Administrator and navigate to:
+```
 C:\Windows\System32\drivers\etc
-Select All files and open hosts
-
-Add under your localhost
+```
+- Select All files and open hosts
+- Add under your localhost:
+```
 #localhost
 127.0.0.1 hotel-booking.local
+```
 
+Save and close the host file.
+##
 
-# Start docker container to host the server
+### Start the docker container to host the server
 
 Get into the directory: 
+```
 cd mybookingrewards/docker 
+```
 
-run:
+In the docker directory execute the command to start the docker container:
+```
 docker compose up -d
+```
+
+Once all images are up execute the command to get into the server
+```
 docker compose exec php bash
+```
+##
+### Get into the Laravel application
+```
 cd hotel-booking/
+```
 
-Once you're in the director:
-/var/www/hotel-booking#
+- Once you're in the application's directory: `/var/www/hotel-booking#`
 
-run: composer install
-
-# Create .env file
-copy the example file and create new .env file in the project
+run composer install: 
+```
+composer install
+```
+### Add an .env file to the project
+- copy the example file and create a new .env file in the project
+```
 cp .env.example  .env
+```
 
-# run permissions
+Once the .env file is added run migration and seed the database
+```
+php artisan migrate:fresh --seed
+```
+
+### Add permissions for local environment
+```
 chmod -R 777 storage
 chmod -R 777 bootstrap/cache
+```
