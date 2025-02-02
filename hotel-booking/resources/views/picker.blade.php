@@ -10,6 +10,7 @@
                        @input="$dispatch('date-updated', date)"
                        class="w-full rounded-md bg-white outline-1 outline-gray-300  py-1.5 pr-8 pl-3 text-gray-900"/>
             </div>
+                <span x-text="dateOutOfRange" class="text-red-500"></span>
             <div
                 class="bg-white mt-2 rounded-lg shadow p-4 absolute"
                 style="width: 17rem"
@@ -86,6 +87,7 @@
                 month: '',
                 year: '',
                 no_of_days: [],
+                dateOutOfRange: '',
 
                 convertFromYmd(dateYmd) {
                     const year = Number(dateYmd.substr(0, 4));
@@ -181,12 +183,21 @@
                         // this.dateToYmd = this.convertToYmd(this.dateTo);
                     }
 
-                    if (this.dateFrom && this.dateTo) {
+                    const date1 = new Date(this.dateFrom);
+                    const date2 = new Date(this.dateTo);
+                    const diffTime = Math.abs(date2 - date1);
+                    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                    console.log(diffDays + " days");
+                    if (diffDays >=1 && diffDays <=7) {
+                        this.dateOutOfRange = '';
                         let options = { day: '2-digit', month: 'short', year: 'numeric' };
                         this.chosenDate = this.dateFrom.toLocaleDateString('en-GB', options) + ' to ' + this.dateTo.toLocaleDateString('en-GB', options);
 
-                    }
                     Livewire.dispatch('updateDate', [this.chosenDate]);
+                    } else {
+                        this.dateOutOfRange = 'Date range should be between 1 and 7 days';
+                    }
                 },
 
                 setDateValues() {
