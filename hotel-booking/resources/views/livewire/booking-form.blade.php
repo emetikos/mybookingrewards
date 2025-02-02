@@ -32,7 +32,7 @@
                     <div class="w-1/2">
                         <label class="block text-sm/6 font-medium text-gray-900">Dates*</label>
                         @include('picker')
-                        @error('nights') <span class="text-red-500">Please select a date range</span> @enderror
+                        @error('nights') <span class="text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="w-1/2">
@@ -49,8 +49,6 @@
                     <div class="w-1/2">
                         <label class="block text-sm/6 font-medium text-gray-900">Number of rooms*</label>
                         <input type="number"
-{{--                               min="1"--}}
-{{--                               max="2"--}}
                                wire:model="rooms"
                                class="w-full rounded-md bg-white outline-1 outline-gray-300 py-1.5 pl-3 pr-1 text-gray-900">
                         @error('rooms') <span class="text-red-500">{{ $message }}</span> @enderror
@@ -60,8 +58,6 @@
                     <div class="w-1/2">
                         <label class="block text-sm/6 font-medium text-gray-900">Number of Pax*</label>
                         <input type="number"
-{{--                               min="1"--}}
-{{--                               max="5"--}}
                                wire:model="pax"
                                class="w-full rounded-md bg-white outline-1 outline-gray-300 py-1.5 pl-3 pr-1 text-gray-900">
                         @error('pax') <span class="text-red-500">{{ $message }}</span> @enderror
@@ -69,12 +65,15 @@
                 </div>
 
 
-                    <div class="w-full grin grin-cols-1 gap-4 mb-4">
+                <div class="w-full grin grin-cols-1 gap-4 mb-4">
 
-                        <label class="block text-sm/6 font-medium text-gray-900">@if($pax > 1 )Notes* @else Notes @endif</label>
-                        <textarea wire:model="notes" class=" w-full rounded-md bg-white outline-1 outline-gray-300  py-1.5 pr-8 pl-3 text-gray-900" rows="5"></textarea>
-                        @error('notes') <span class="text-red-500">{{ $message }}</span> @enderror
-                    </div>
+                    <label class="block text-sm/6 font-medium text-gray-900">@if($pax > 1 )Notes* @else Notes @endif</label>
+                    <textarea class=" w-full rounded-md bg-white outline-1 outline-gray-300  py-1.5 pr-8 pl-3 text-gray-900"
+                              wire:model="notes"
+                              placeholder="Notes, e.g. additional guest names, age of children, flexible dates, room upgrade request, bedding requests, special requests, etc."
+                              rows="5"></textarea>
+                    @error('notes') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
 
 
                 <button wire:click="submit" wire:loading.attr="disabled" class="bg-green-500 rounded p-2 text-white hover hover:bg-green-600 cursor-pointer">Save Booking</button>
@@ -105,23 +104,8 @@
 
 
             </table>
-            <p class="flex justify-center text-[#1d294f] font-bold text-2xl">Total Cost: {{$this->total}}</p>
+            <p class="flex justify-center text-[#1d294f] font-bold text-2xl">Total Cost: {{$this->total}} USD</p>
         </div>
     @endif
-
-
-
 </div>
 
-{{--<div>--}}
-{{--    <p>Received Value: {{ $this->chosenDate }}</p>--}}
-{{--    <button wire:click="save" class="bg-green-500 rounded p-2 text-white hover hover:bg-green-600 cursor-pointer">Save Booking</button>--}}
-{{--    <script>--}}
-{{--        --}}
-{{--        document.addEventListener('livewire:init', () => {--}}
-{{--            Livewire.dispatch('handleValue');--}}
-
-{{--            console.log({ value: "value" })--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--</div>--}}
