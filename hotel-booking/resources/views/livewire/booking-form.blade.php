@@ -32,7 +32,6 @@
                     <div class="w-1/2">
                         <label class="block text-sm/6 font-medium text-gray-900">Dates*</label>
                         @include('picker')
-                        @error('nights') <span class="text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="w-1/2">
