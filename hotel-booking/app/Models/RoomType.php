@@ -13,7 +13,7 @@ class RoomType extends Model
     protected $fillable = [
         'hotel_id',
         'name',
-        'room_night_cost'
+        'room_night_cost',
     ];
 
     public function hotel(): BelongsTo

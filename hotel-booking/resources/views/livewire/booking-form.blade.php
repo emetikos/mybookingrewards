@@ -84,8 +84,7 @@
 
         </div>
 
-
-        @if($total)
+        @if($bookingSummery)
             <div class="w-1/3 outline-1 outline-gray-300 rounded p-4 mt-4">
                 <table class="min-w-full bg-white">
                     <thead>
@@ -105,14 +104,12 @@
                     @endforeach
                     </tbody>
 
-
                 </table>
-                <p class="flex justify-center text-[#1d294f] font-bold text-2xl">Total Cost: {{$total}}USD</p>
+                <p class="flex justify-center text-[#1d294f] font-bold text-2xl">Total Cost: {{$bookingSummery}}USD</p>
 
                 <button wire:click="submit" wire:loading.attr="disabled" class="bg-green-500 rounded p-2 text-white hover hover:bg-green-600 cursor-pointer">Save Booking</button>
             </div>
         @endif
-
 
         <div class="w-full outline-1 outline-gray-300 rounded p-4 mt-4">
             <table class="min-w-full bg-white">

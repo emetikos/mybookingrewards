@@ -13,11 +13,17 @@ use Livewire\Component;
 class BookingForm extends Component
 {
     public $hotelId;
+
     public $roomId;
+
     public $dates;
+
     public $nights;
+
     public $rooms;
+
     public $pax;
+
     public $notes;
 
     private static function getDateRange(array $reservationDates): array
@@ -28,6 +34,7 @@ class BookingForm extends Component
         foreach ($range as $date) {
             $datesToPrint[] = $date->format('d M Y');
         }
+
         return $datesToPrint;
     }
 
@@ -41,6 +48,7 @@ class BookingForm extends Component
                 'checkOut' => Carbon::parse($dateArr[1]),
             ];
         }
+
         return [];
     }
 
@@ -50,8 +58,8 @@ class BookingForm extends Component
         for ($i = 0; $i < $this->nights; $i++) {
             $dataArr[] = [
                 'Date' => $datesToPrint[$i] ?? null,
-                'Details' => $this->rooms . (($this->rooms > 1) ? ' rooms' : ' room') . ' * ' . $roomType->room_night_cost . ' USD',
-                'Daily Total' => $this->rooms * $roomType->room_night_cost . ' USD',
+                'Details' => $this->rooms.(($this->rooms > 1) ? ' rooms' : ' room').' * '.$roomType->room_night_cost.' USD',
+                'Daily Total' => $this->rooms * $roomType->room_night_cost.' USD',
             ];
         }
 
@@ -78,17 +86,20 @@ class BookingForm extends Component
             'pax' => 'required|integer|min:1|max:5',
         ];
     }
+
     #[Computed]
     public function getHotels()
     {
         return Hotel::all();
     }
+
     #[Computed]
     public function roomTypes()
     {
         if ($this->hotelId) {
             return RoomType::where('hotel_id', $this->hotelId)->get();
         }
+
         return [];
     }
 
@@ -107,7 +118,7 @@ class BookingForm extends Component
             'nights' => $this->nights,
             'rooms' => $this->rooms,
             'pax' => $this->pax,
-            'total' => $this->rooms * $roomType->room_night_cost * $this->nights
+            'total' => $this->rooms * $roomType->room_night_cost * $this->nights,
         ]);
 
         $this->reset();
@@ -118,7 +129,7 @@ class BookingForm extends Component
     {
         $reservation = [];
         $datesToPrint = [];
-        $total = null;
+        $bookingSummery = null;
 
         $reservationDates = self::getReservationDates();
 
@@ -132,12 +143,12 @@ class BookingForm extends Component
 
         if ($roomType) {
             $reservation = self::getReservationData($roomType, $datesToPrint);
-            $total = $this->rooms * $roomType->room_night_cost * $this->nights;
+            $bookingSummery = $this->rooms * $roomType->room_night_cost * $this->nights;
         }
 
         return view('livewire.booking-form')->with([
             'reservation' => $reservation,
-            'total' => $total,
+            'bookingSummery' => $bookingSummery,
             'showBookings' => Reservation::all(),
         ]);
     }
