@@ -78,12 +78,12 @@ class BookingForm extends Component
             'pax' => 'required|integer|min:1|max:5',
         ];
     }
-    #[computed]
+    #[Computed]
     public function getHotels()
     {
         return Hotel::all();
     }
-    #[computed]
+    #[Computed]
     public function roomTypes()
     {
         if ($this->hotelId) {
@@ -111,6 +111,7 @@ class BookingForm extends Component
         ]);
 
         $this->reset();
+        $this->dispatch('success');
     }
 
     public function render()
